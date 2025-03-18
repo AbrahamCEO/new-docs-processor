@@ -269,6 +269,18 @@ class DocumentProcessorUI(ctk.CTk):
             "Success",
             f"Documents processed successfully!\nOutput directory: {result['output_directory']}"
         )
+        
+        # Ask user if they want to open the output folder
+        if messagebox.askyesno(
+            "Open Folder",
+            "Would you like to open the output folder?",
+            icon="question"
+        ):
+            try:
+                os.startfile(result['output_directory'])
+            except Exception as e:
+                self.log_message(f"Error opening folder: {str(e)}")
+                messagebox.showerror("Error", f"Could not open folder: {str(e)}")
 
     def handle_failure(self):
         """Handle document processing failure"""
