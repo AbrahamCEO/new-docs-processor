@@ -3,6 +3,7 @@ import subprocess
 import sys
 import shutil
 from png_to_ico import png_to_ico
+from build import build_executable
 
 def check_nsis_installed():
     """Check if NSIS is installed"""
@@ -48,38 +49,6 @@ def create_app_icon():
         return True
     else:
         print("Failed to create icon")
-        return False
-
-def build_executable():
-    """Build the executable using PyInstaller"""
-    print("\nBuilding TwinRain Document Processor executable...")
-    
-    # Clean previous build if exists
-    if os.path.exists("dist"):
-        shutil.rmtree("dist")
-    if os.path.exists("build"):
-        shutil.rmtree("build")
-        
-    # Run PyInstaller
-    try:
-        result = subprocess.run(["pyinstaller", "document_processor.spec"], 
-                               capture_output=True, text=True)
-        
-        if result.returncode != 0:
-            print("Error building executable:")
-            print(result.stderr)
-            return False
-        
-        dist_path = os.path.abspath('dist/TwinRain Document Processor')
-        if not os.path.exists(dist_path):
-            print(f"Error: Executable not found in expected location: {dist_path}")
-            return False
-            
-        print("Executable built successfully!")
-        print(f"Output directory: {dist_path}")
-        return True
-    except FileNotFoundError:
-        print("Error: PyInstaller not found. Please install it with 'pip install pyinstaller'")
         return False
 
 def build_installer(nsis_path):
@@ -155,6 +124,36 @@ def check_prerequisites():
         
     return True
 
+def ensure_directory_structure():
+    """Ensure necessary directory structure exists"""
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Define key directories
+    assets_dir = os.path.join(base_dir, 'public', 'assets')
+    docs_dir = os.path.join(base_dir, 'Documents')
+    
+    # Create required directories
+    dirs_to_create = [
+        assets_dir,
+        os.path.join(docs_dir, 'Cover Letters', 'Shitongeni'),
+        os.path.join(docs_dir, 'Cover Letters', 'Wilson'),
+        os.path.join(docs_dir, 'Cover Letters', 'Extras', 'Shitongeni'),
+        os.path.join(docs_dir, 'Cover Letters', 'Extras', 'Wilson'),
+        os.path.join(docs_dir, 'Printable Documents'),
+        os.path.join(docs_dir, 'Resumes')
+    ]
+    
+    for dir_path in dirs_to_create:
+        if not os.path.exists(dir_path):
+            try:
+                os.makedirs(dir_path)
+                print(f"Created directory: {dir_path}")
+            except Exception as e:
+                print(f"Error creating directory {dir_path}: {str(e)}")
+                return False
+    
+    return True
+
 def main():
     """Main function to build installer"""
     print("=" * 60)
@@ -167,13 +166,19 @@ def main():
         print("Prerequisite check failed. Please install missing packages.")
         return False
     
-    # Step 2: Create app icon
-    print("\nStep 2: Creating application icon...")
+    # Step 2: Ensure directory structure
+    print("\nStep 2: Ensuring directory structure...")
+    if not ensure_directory_structure():
+        print("Failed to create required directories. Please check permissions.")
+        return False
+    
+    # Step 3: Create app icon
+    print("\nStep 3: Creating application icon...")
     if not create_app_icon():
         print("Warning: Failed to create application icon. Continuing anyway...")
     
-    # Step 3: Check if NSIS is installed
-    print("\nStep 3: Checking for NSIS installation...")
+    # Step 4: Check if NSIS is installed
+    print("\nStep 4: Checking for NSIS installation...")
     nsis_path = check_nsis_installed()
     
     if not nsis_path:
@@ -183,14 +188,14 @@ def main():
     
     print(f"NSIS found at: {nsis_path}")
     
-    # Step 4: Build the executable
-    print("\nStep 4: Building executable...")
+    # Step 5: Build the executable
+    print("\nStep 5: Building executable...")
     if not build_executable():
         print("Failed to build executable. Aborting.")
         return False
     
-    # Step 5: Build the installer
-    print("\nStep 5: Building installer...")
+    # Step 6: Build the installer
+    print("\nStep 6: Building installer...")
     if not build_installer(nsis_path):
         print("Failed to build installer.")
         return False

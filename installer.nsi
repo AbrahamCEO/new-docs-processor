@@ -46,6 +46,13 @@ Section "Install"
     ; Include all files from the dist directory
     File /r "dist\${APP_NAME}\*.*"
     
+    ; Create user data directories in %APPDATA%
+    CreateDirectory "$APPDATA\${APP_NAME}"
+    CreateDirectory "$APPDATA\${APP_NAME}\logs"
+    
+    ; Create RFQ Automation directory on Desktop
+    CreateDirectory "$DESKTOP\RFQ Automation"
+    
     ; Create Start Menu shortcut
     CreateDirectory "$SMPROGRAMS\${APP_NAME}"
     CreateShortCut "$SMPROGRAMS\${APP_NAME}\${APP_NAME}.lnk" "$INSTDIR\${APP_EXE}" "" "$INSTDIR\${APP_EXE}" 0
@@ -82,6 +89,8 @@ Section "Uninstall"
     
     ; Remove installed files
     RMDir /r "$INSTDIR"
+    
+    ; Note: We don't remove user data from %APPDATA% to preserve user documents and logs
     
     ; Remove registry keys
     DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"

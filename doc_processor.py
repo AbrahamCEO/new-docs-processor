@@ -12,6 +12,7 @@ import shutil
 import asyncio
 import concurrent.futures
 from operator import itemgetter
+import sys
 
 class DocumentProcessor:
     def __init__(self):
@@ -28,20 +29,89 @@ class DocumentProcessor:
             "*ADD V&P*": "Price Validity: ",
             "*ADD S&R*": "Sales Representative: ",
         }
-        self.base_path = r"C:\Users\AbrahamCEO\Desktop\projects\new-docs-processor\Documents\Cover Letters"
-        self.extras_path = os.path.join(self.base_path, "Extras")
-        self.max_workers = 4  # Number of concurrent processes
+        # Update base paths for all document types
+        self.base_paths = {
+            'cover_letters': os.path.join(self.get_documents_path(), 'Cover Letters'),
+            'resumes': os.path.join(self.get_documents_path(), 'Resumes'),
+            'printable': os.path.join(self.get_documents_path(), 'Printable Documents')
+        }
+        self.extras_path = os.path.join(self.base_paths['cover_letters'], "Extras")
+        self.max_workers = 4
+
+    def get_documents_path(self):
+        """Get the correct Documents path based on whether running as exe or script"""
+        if getattr(sys, 'frozen', False):
+            # Running as compiled executable
+            base_dir = os.path.dirname(sys.executable)
+            # Check if we're in the _internal directory structure
+            if os.path.basename(base_dir) == '_internal':
+                return os.path.join(base_dir, 'Documents')
+            else:
+                return os.path.join(base_dir, '_internal', 'Documents')
+        else:
+            # Running as script
+            return os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Documents')
 
     def setup_logging(self):
-        """Configure logging"""
-        logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)s - %(levelname)s - %(message)s',
-            handlers=[
-                logging.FileHandler('document_processor.log'),
-            ]
-        )
-        return logging.getLogger(__name__)
+        """Set up logging configuration"""
+        try:
+            # Use a user-writeable location for logs
+            if getattr(sys, 'frozen', False):
+                # Running as compiled executable
+                # Use %APPDATA% for logs when installed
+                log_dir = os.path.join(os.environ.get('APPDATA', os.path.expanduser('~')), 'TwinRain Document Processor')
+            else:
+                # Running as script
+                log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logs')
+                
+            # Create logs directory if it doesn't exist
+            os.makedirs(log_dir, exist_ok=True)
+            
+            log_file = os.path.join(log_dir, 'document_processor.log')
+            
+            # Configure logging
+            logger = logging.getLogger('DocumentProcessor')
+            logger.setLevel(logging.INFO)
+            
+            # Create file handler
+            file_handler = logging.FileHandler(log_file)
+            file_handler.setLevel(logging.INFO)
+            
+            # Create console handler
+            console_handler = logging.StreamHandler()
+            console_handler.setLevel(logging.INFO)
+            
+            # Create formatter and add to handlers
+            formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+            file_handler.setFormatter(formatter)
+            console_handler.setFormatter(formatter)
+            
+            # Add handlers to logger
+            logger.addHandler(file_handler)
+            logger.addHandler(console_handler)
+            
+            # Log startup information
+            logger.info("Document Processor initialized")
+            logger.info(f"Log file: {log_file}")
+            
+            return logger
+        except Exception as e:
+            print(f"Error setting up logging: {str(e)}")
+            # Fallback to basic logger that doesn't use files
+            logger = logging.getLogger('DocumentProcessor')
+            logger.setLevel(logging.INFO)
+            
+            # Only use console handler as fallback
+            console_handler = logging.StreamHandler()
+            console_handler.setLevel(logging.INFO)
+            
+            formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+            console_handler.setFormatter(formatter)
+            
+            logger.addHandler(console_handler)
+            logger.warning(f"Using fallback logging due to error: {str(e)}")
+            
+            return logger
 
     def is_shape_locked(self, shape_element):
         """
@@ -575,11 +645,9 @@ class DocumentProcessor:
             if replacements is None:
                 replacements = {}
 
-            # Format the date in replacements if it exists
+            # Format the date and time in replacements if they exist
             if "*ADD DD*" in replacements:
                 replacements["*ADD DD*"] = self.format_date(replacements["*ADD DD*"])
-                
-            # Format the closing time to ensure it has AM/PM
             if "*C&T*" in replacements:
                 replacements["*C&T*"] = self.format_time(replacements["*C&T*"])
 
@@ -588,72 +656,95 @@ class DocumentProcessor:
             project_name = replacements.get("*ADD S&D*", "").strip()
             procurement_ref = replacements.get("*ADD P&R*", "").strip()
             
+            # Validate required fields
             if not client_name:
-                raise ValueError("Client Name is required")
-            if not project_name:
-                raise ValueError("Project Name is required")
+                raise ValueError("Client name is required")
             if not procurement_ref:
-                raise ValueError("Procurement Reference No is required")
+                raise ValueError("Procurement reference is required")
             
-            # Clean the names to make them suitable for folder names
-            safe_client_name = "".join(c for c in client_name if c.isalnum() or c in (' ', '-', '_')).strip()
-            safe_project_name = "".join(c for c in project_name if c.isalnum() or c in (' ', '-', '_')).strip()
-            # Replace slashes with hyphens in procurement reference
-            safe_proc_ref = procurement_ref.replace('/', '-').strip()
+            # Clean project name and procurement ref for folder names
+            project_name = project_name.replace('/', '-').replace('\\', '-').strip()
+            procurement_ref = procurement_ref.replace('/', '-').replace('\\', '-').strip()
             
-            # Create directory structure:
-            # Desktop/RFQ Automation/Client Name/Project Name (Procurement Reference)
+            # Set up output directory using Desktop/RFQ Automation
             desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop')
-            rfq_automation_dir = os.path.join(desktop_path, "RFQ Automation")
-            client_dir = os.path.join(rfq_automation_dir, safe_client_name)
-            project_dir = os.path.join(client_dir, f"{safe_project_name} ({safe_proc_ref})")
+            rfq_automation_dir = os.path.join(desktop_path, 'RFQ Automation')
+            client_dir = os.path.join(rfq_automation_dir, client_name)
+            project_dir = os.path.join(client_dir, f"{project_name} ({procurement_ref})")
             
-            # Create directories
+            # Create the directory if it doesn't exist
             os.makedirs(project_dir, exist_ok=True)
             self.logger.info(f"Created output directory: {project_dir}")
 
-            # Get main documents (from Cover Letters) and sort them by number
-            main_folder = os.path.join(self.base_path, selected_folder)
-            main_docs = []
+            # Initialize list to store all documents to process
+            all_docs_to_process = []
+            pdf_files = []
+
+            # Process Cover Letters
+            main_folder = os.path.join(self.base_paths['cover_letters'], selected_folder)
+            cover_letter_docs = []
             for root, _, files in os.walk(main_folder):
                 if "Extras" not in root:  # Skip extras folder
                     for file in files:
                         if file.endswith('.docx'):
                             order = self.get_doc_order(file)
-                            main_docs.append((order, os.path.join(root, file)))
+                            cover_letter_docs.append((order, os.path.join(root, file)))
             
-            # Sort documents by their order number
-            main_docs.sort(key=itemgetter(0))  # Sort by the order number
-            main_docs = [doc[1] for doc in main_docs]  # Get just the file paths
+            # Process Resumes
+            resume_folder = os.path.join(self.base_paths['resumes'], selected_folder)
+            resume_docs = []
+            if os.path.exists(resume_folder):
+                for root, _, files in os.walk(resume_folder):
+                    for file in files:
+                        if file.endswith('.docx'):
+                            order = self.get_doc_order(file)
+                            resume_docs.append((order, os.path.join(root, file)))
 
-            # Get extras documents and sort them
+            # Process Printable Documents
+            printable_folder = os.path.join(self.base_paths['printable'])
+            printable_docs = []
+            if os.path.exists(printable_folder):
+                for root, _, files in os.walk(printable_folder):
+                    for file in files:
+                        if file.endswith('.docx'):
+                            order = self.get_doc_order(file)
+                            printable_docs.append((order, os.path.join(root, file)))
+
+            # Sort all document lists
+            cover_letter_docs.sort(key=itemgetter(0))
+            resume_docs.sort(key=itemgetter(0))
+            printable_docs.sort(key=itemgetter(0))
+
+            # Combine all documents in order: Cover Letters -> Resumes -> Printable Documents
+            all_docs = [doc[1] for doc in cover_letter_docs + resume_docs + printable_docs]
+
+            # Get extras documents
             extras_folder = os.path.join(self.extras_path, selected_folder)
             extras_docs = []
-            for root, _, files in os.walk(extras_folder):
-                for file in files:
-                    if file.endswith('.docx'):
-                        order = self.get_doc_order(file)
-                        extras_docs.append((order, os.path.join(root, file)))
+            if os.path.exists(extras_folder):
+                for root, _, files in os.walk(extras_folder):
+                    for file in files:
+                        if file.endswith('.docx'):
+                            order = self.get_doc_order(file)
+                            extras_docs.append((order, os.path.join(root, file)))
             
             extras_docs.sort(key=itemgetter(0))
             extras_docs = [doc[1] for doc in extras_docs]
 
-            total_files = len(main_docs) + len(extras_docs)
+            total_files = len(all_docs) + len(extras_docs)
             processed_files = 0
-            pdf_files = []
 
-            # Prepare main documents for async processing
-            main_docs_to_process = []
-            for doc_path in main_docs:
+            # Prepare all documents for processing
+            for doc_path in all_docs:
                 output_word = os.path.join(project_dir, os.path.basename(doc_path))
-                main_docs_to_process.append((doc_path, output_word, replacements))
+                all_docs_to_process.append((doc_path, output_word, replacements))
 
-            # Process main documents asynchronously
-            self.logger.info(f"Processing {len(main_docs)} main documents...")
-            asyncio.run(self.process_documents_async(main_docs_to_process))
+            # Process all documents asynchronously
+            self.logger.info(f"Processing {len(all_docs)} documents...")
+            asyncio.run(self.process_documents_async(all_docs_to_process))
 
             # Convert processed documents to PDF
-            for doc_info in main_docs_to_process:
+            for doc_info in all_docs_to_process:
                 _, output_word, _ = doc_info
                 output_pdf = os.path.join(project_dir, 
                                       os.path.splitext(os.path.basename(output_word))[0] + '.pdf')
@@ -670,19 +761,6 @@ class DocumentProcessor:
                 processed_files += 1
                 if progress_callback:
                     progress_callback(processed_files, total_files, output_pdf)
-
-            # Prepare extras documents for async processing
-            extras_docs_to_process = []
-            for doc_path in extras_docs:
-                output_path = os.path.join(project_dir, os.path.basename(doc_path))
-                extras_docs_to_process.append((doc_path, output_path, replacements))
-
-            # Process extras documents asynchronously
-            self.logger.info(f"Processing {len(extras_docs)} extras documents...")
-            asyncio.run(self.process_documents_async(extras_docs_to_process))
-            processed_files += len(extras_docs)
-            if progress_callback:
-                progress_callback(processed_files, total_files, "Completed extras processing")
 
             # Merge and compress PDFs
             final_pdf = None
@@ -701,7 +779,7 @@ class DocumentProcessor:
                     merger.close()
                     
                     # Step 2: Compress the merged PDF to final location
-                    final_pdf_path = os.path.join(project_dir, f'{safe_project_name} ({safe_proc_ref}).pdf')
+                    final_pdf_path = os.path.join(project_dir, f'{project_name} ({procurement_ref}).pdf')
                     with pikepdf.open(temp_merged_path) as pdf:
                         pdf.save(final_pdf_path,
                                compress_streams=True,

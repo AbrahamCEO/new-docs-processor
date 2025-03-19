@@ -9,6 +9,7 @@ import subprocess
 from PIL import Image
 from tkcalendar import DateEntry
 import tkinter.ttk as ttk
+import sys
 
 class DocumentProcessorUI(ctk.CTk):
     def __init__(self):
@@ -20,17 +21,29 @@ class DocumentProcessorUI(ctk.CTk):
         self.processing = False
         self.log_visible = False
         
-        # Set paths
-        base_dir = r"C:\Users\AbrahamCEO\Desktop\projects\new-docs-processor"
-        self.printable_docs_path = os.path.join(base_dir, "Documents", "Printable Documents")
-        self.resumes_path = os.path.join(base_dir, "Documents", "Resumes")
-        self.logo_path = os.path.join(base_dir, "public", "assets", "twinrain-logo.png")
+        # Get the correct paths using the DocumentProcessor's method for consistency
+        self.documents_path = self.doc_processor.get_documents_path()
+        self.printable_docs_path = os.path.join(self.documents_path, "Printable Documents")
+        self.resumes_path = os.path.join(self.documents_path, "Resumes")
+        
+        # Set logo path using relative paths based on the application's location
+        if getattr(sys, 'frozen', False):
+            # If running as compiled executable
+            self.base_dir = os.path.dirname(sys.executable)
+            if os.path.basename(self.base_dir) == '_internal':
+                self.logo_path = os.path.join(self.base_dir, "public", "assets", "twinrain-logo.png")
+            else:
+                self.logo_path = os.path.join(self.base_dir, "_internal", "public", "assets", "twinrain-logo.png")
+        else:
+            # If running as script
+            self.base_dir = os.path.dirname(os.path.abspath(__file__))
+            self.logo_path = os.path.join(self.base_dir, "public", "assets", "twinrain-logo.png")
 
         # Configure logging and UI
         self.setup_logging()
         self.setup_ui()
         
-        # Select default folder after UI creation
+        # Select default folder after UI creation and maximize window
         self.after(100, lambda: [self.state('zoomed'), self.select_folder("Shitongeni")])
 
     def setup_ui(self):
@@ -45,27 +58,41 @@ class DocumentProcessorUI(ctk.CTk):
         self.state('zoomed')
         self.resizable(True, True)
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
+        
+        # Set minimum window size to ensure elements remain visible
+        self.minsize(1000, 700)
 
         # Create layout
         self.create_layout()
 
     def create_layout(self):
         """Create main layout"""
-        # Create sidebar
-        self.sidebar = ctk.CTkFrame(self, width=300)
-        self.sidebar.pack(side="left", fill="y", padx=(20, 10), pady=20)
-        self.sidebar.pack_propagate(False)
+        # Create main container with grid layout for better scaling
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=5)  # Increase weight of main content area
+        self.grid_rowconfigure(0, weight=1)
+        
+        # Create sidebar with reduced width
+        self.sidebar = ctk.CTkFrame(self, width=220)  # Reduced from 300 to 220
+        self.sidebar.grid(row=0, column=0, sticky="nsew", padx=(20, 10), pady=20)
+        self.sidebar.grid_propagate(False)
         
         # Create main content area
         self.main_content = ctk.CTkFrame(self)
-        self.main_content.pack(side="left", fill="both", expand=True, padx=(10, 20), pady=20)
+        self.main_content.grid(row=0, column=1, sticky="nsew", padx=(10, 20), pady=20)
+        
+        # Configure main_content for vertical layout
+        self.main_content.grid_columnconfigure(0, weight=1)
+        self.main_content.grid_rowconfigure(0, weight=0)  # Header
+        self.main_content.grid_rowconfigure(1, weight=0)  # Folder selection
+        self.main_content.grid_rowconfigure(2, weight=0)  # Input fields (non-scrollable)
+        self.main_content.grid_rowconfigure(3, weight=0)  # Progress section
         
         # Create UI sections
         self.create_header()
         self.create_folder_section()
         self.create_input_fields()
         self.create_progress_section()
-        self.create_collapsible_log()
         self.create_sidebar_content()
 
     def create_button(self, parent, text, command, **kwargs):
@@ -89,7 +116,10 @@ class DocumentProcessorUI(ctk.CTk):
     def create_folder_section(self):
         """Create folder selection section"""
         folder_frame = ctk.CTkFrame(self.main_content)
-        folder_frame.pack(fill="x", padx=10, pady=(0, 20))
+        folder_frame.grid(row=1, column=0, sticky="ew", padx=10, pady=(0, 10))
+        
+        # Configure folder frame layout
+        folder_frame.grid_columnconfigure(0, weight=1)
         
         ctk.CTkLabel(
             folder_frame,
@@ -117,10 +147,121 @@ class DocumentProcessorUI(ctk.CTk):
         )
         self.wilson_btn.pack(side="right", padx=10, expand=True)
 
+    def create_input_fields(self):
+        """Create input fields section"""
+        # Use a regular frame instead of scrollable frame
+        input_container = ctk.CTkFrame(self.main_content)
+        input_container.grid(row=2, column=0, sticky="nsew", padx=10, pady=(0, 10))
+        
+        # Configure input container layout
+        input_container.grid_columnconfigure(0, weight=1)
+        
+        # Title for the section
+        title = ctk.CTkLabel(
+            input_container,
+            text="Document Information",
+            font=ctk.CTkFont(size=16, weight="bold")
+        )
+        title.pack(pady=(10, 15))
+        
+        # Create a regular frame for fields
+        fields_frame = ctk.CTkFrame(input_container)
+        fields_frame.pack(fill="both", expand=True, padx=10, pady=(0, 10))
+
+        self.entries = {}
+        for i, (keyword, prompt) in enumerate(self.doc_processor.keywords_prompts.items()):
+            field_frame = ctk.CTkFrame(fields_frame)
+            field_frame.pack(fill="x", padx=5, pady=5)
+            
+            label = ctk.CTkLabel(
+                field_frame,
+                text=prompt,
+                font=ctk.CTkFont(size=12),
+                width=200,
+                anchor="w"
+            )
+            label.pack(side="left", padx=(10, 5))
+            
+            # Special handling for closing date and time
+            if keyword == "*ADD DD*":
+                # Create date picker
+                date_frame = ctk.CTkFrame(field_frame)
+                date_frame.pack(side="left", fill="x", expand=True, padx=(5, 10))
+                
+                date_picker = DateEntry(date_frame, width=20, background='darkblue',
+                                    foreground='white', borderwidth=2)
+                date_picker.pack(side="left", padx=5, pady=5)
+                self.entries[keyword] = date_picker
+                
+            elif keyword == "*C&T*":
+                # Create time picker frame
+                time_frame = ctk.CTkFrame(field_frame)
+                time_frame.pack(side="left", fill="x", expand=True, padx=(5, 10))
+                
+                # Hours entry field
+                hour_var = tk.StringVar(value="01")
+                hour_entry = ctk.CTkEntry(
+                    time_frame,
+                    textvariable=hour_var,
+                    width=50,
+                    height=35,
+                    font=ctk.CTkFont(size=12),
+                    placeholder_text="HH"
+                )
+                hour_entry.pack(side="left", padx=2)
+                
+                # Separator label
+                separator = ctk.CTkLabel(
+                    time_frame,
+                    text=":",
+                    font=ctk.CTkFont(size=14, weight="bold"),
+                    width=10
+                )
+                separator.pack(side="left")
+                
+                # Minutes entry field
+                minute_var = tk.StringVar(value="00")
+                minute_entry = ctk.CTkEntry(
+                    time_frame,
+                    textvariable=minute_var,
+                    width=50,
+                    height=35,
+                    font=ctk.CTkFont(size=12),
+                    placeholder_text="MM"
+                )
+                minute_entry.pack(side="left", padx=2)
+                
+                # AM/PM picker
+                ampm_var = tk.StringVar(value="PM")
+                ampm_menu = ctk.CTkOptionMenu(
+                    time_frame,
+                    variable=ampm_var,
+                    values=["AM", "PM"],
+                    width=70,
+                    height=35,
+                    font=ctk.CTkFont(size=12)
+                )
+                ampm_menu.pack(side="left", padx=2)
+                
+                self.entries[keyword] = (hour_var, minute_var, ampm_var)
+            else:
+                # Regular text entry for other fields
+                entry = ctk.CTkEntry(
+                    field_frame,
+                    placeholder_text=f"Enter {prompt.lower().strip(': ')}",
+                    height=35,
+                    font=ctk.CTkFont(size=12)
+                )
+                entry.pack(side="left", fill="x", expand=True, padx=(5, 10))
+                self.entries[keyword] = entry
+
     def create_progress_section(self):
         """Create progress section"""
         progress_frame = ctk.CTkFrame(self.main_content)
-        progress_frame.pack(fill="x", padx=10, pady=(0, 20))
+        progress_frame.grid(row=3, column=0, sticky="ew", padx=10, pady=(0, 10))
+        
+        # Configure progress frame layout
+        progress_frame.grid_columnconfigure(0, weight=1)
         
         self.progress_label = ctk.CTkLabel(
             progress_frame,
@@ -136,13 +277,222 @@ class DocumentProcessorUI(ctk.CTk):
         button_frame = ctk.CTkFrame(progress_frame)
         button_frame.pack(fill="x", pady=10)
         
-        self.process_button = self.create_button(
+        self.process_button = ctk.CTkButton(
             button_frame,
-            "Process Documents",
-            self.process_documents,
-            state="disabled"
+            text="Process Documents",
+            command=self.process_documents,
+            state="disabled",
+            font=ctk.CTkFont(size=14, weight="bold"),
+            height=40,
+            hover_color=("#1f538d", "#2d7bd4")
         )
         self.process_button.pack(pady=5)
+
+    def create_sidebar_content(self):
+        """Create sidebar with both Printable Documents and Resumes sections"""
+        # Create scrollable frame for all content
+        self.sidebar_scroll = ctk.CTkScrollableFrame(
+            self.sidebar,
+            fg_color="transparent"
+        )
+        self.sidebar_scroll.pack(fill="both", expand=True, padx=5, pady=5)
+
+        # Create Printable Documents section
+        self.create_document_section(
+            "Printable Documents",
+            self.printable_docs_path,
+            self.sidebar_scroll
+        )
+
+        # Add separator
+        separator = ctk.CTkFrame(
+            self.sidebar_scroll,
+            height=2,
+            fg_color=("gray75", "gray25")
+        )
+        separator.pack(fill="x", padx=5, pady=15)
+
+        # Create Resumes section
+        self.create_document_section(
+            "Resumes",
+            self.resumes_path,
+            self.sidebar_scroll
+        )
+        
+        # Add separator
+        separator2 = ctk.CTkFrame(
+            self.sidebar_scroll,
+            height=2,
+            fg_color=("gray75", "gray25")
+        )
+        separator2.pack(fill="x", padx=5, pady=15)
+        
+        # Add signature at the bottom
+        signature_frame = ctk.CTkFrame(
+            self.sidebar_scroll,
+            fg_color="transparent"
+        )
+        signature_frame.pack(fill="x", padx=5, pady=5)
+        
+        # Add Abraham's signature
+        signature_label = ctk.CTkLabel(
+            signature_frame,
+            text="Call Abraham for Help",
+            font=ctk.CTkFont(family="Arial", size=18, weight="bold"),
+            text_color="#1f538d"
+        )
+        signature_label.pack(pady=10, anchor="center")
+
+    def create_document_section(self, title, path, parent):
+        """Create a section in the sidebar for documents"""
+        # Section title
+        section_title = ctk.CTkLabel(
+            parent,
+            text=title,
+            font=ctk.CTkFont(size=16, weight="bold")
+        )
+        section_title.pack(fill="x", pady=(10, 15))
+
+        # Get list of folders
+        try:
+            if os.path.exists(path):
+                folders = [f for f in os.listdir(path) 
+                          if os.path.isdir(os.path.join(path, f))]
+                
+                if not folders:
+                    self.log_message(f"No folders found in {title} directory: {path}")
+                    no_folders_label = ctk.CTkLabel(
+                        parent,
+                        text=f"No folders found in {title}",
+                        font=ctk.CTkFont(size=11, slant="italic"),
+                        text_color="gray60"
+                    )
+                    no_folders_label.pack(fill="x", padx=10, pady=5)
+            else:
+                self.log_message(f"Path does not exist: {path}")
+                path_error_label = ctk.CTkLabel(
+                    parent,
+                    text=f"Directory not found: {os.path.basename(path)}",
+                    font=ctk.CTkFont(size=11, slant="italic"),
+                    text_color="gray60"
+                )
+                path_error_label.pack(fill="x", padx=10, pady=5)
+                return
+        except Exception as e:
+            self.log_message(f"Error accessing {title}: {str(e)}")
+            error_label = ctk.CTkLabel(
+                parent,
+                text=f"Error: {str(e)}",
+                font=ctk.CTkFont(size=11, slant="italic"),
+                text_color="gray60"
+            )
+            error_label.pack(fill="x", padx=10, pady=5)
+            return
+
+        for folder in folders:
+            # Folder label with background
+            folder_label_frame = ctk.CTkFrame(parent)
+            folder_label_frame.pack(fill="x", padx=5, pady=(10, 5))
+            
+            label = ctk.CTkLabel(
+                folder_label_frame,
+                text=folder,
+                font=ctk.CTkFont(size=12, weight="bold"),
+                anchor="w"
+            )
+            label.pack(fill="x", padx=10, pady=5)
+            
+            # Get documents in this folder
+            folder_path = os.path.join(path, folder)
+            try:
+                if os.path.exists(folder_path):
+                    documents = [f for f in os.listdir(folder_path) 
+                               if f.endswith(('.pdf', '.docx'))]  # Support both PDF and Word
+                    
+                    if not documents:
+                        no_docs_label = ctk.CTkLabel(
+                            parent,
+                            text=f"No documents found in {folder}",
+                            font=ctk.CTkFont(size=11, slant="italic"),
+                            text_color="gray60"
+                        )
+                        no_docs_label.pack(fill="x", padx=20, pady=2)
+                        continue
+                else:
+                    self.log_message(f"Folder path does not exist: {folder_path}")
+                    continue
+            except Exception as e:
+                self.log_message(f"Error accessing folder {folder}: {str(e)}")
+                continue
+            
+            # Create document buttons
+            for doc in documents:
+                doc_frame = ctk.CTkFrame(parent, fg_color="transparent")
+                doc_frame.pack(fill="x", padx=5, pady=2)
+                
+                # Add icon based on file type
+                icon = "📄 " if doc.endswith('.pdf') else "📝 "
+                
+                doc_button = ctk.CTkButton(
+                    doc_frame,
+                    text=f"{icon}{doc}",
+                    command=lambda f=folder_path, d=doc: self.view_document(f, d),
+                    anchor="w",
+                    font=ctk.CTkFont(size=11),
+                    height=30,
+                    fg_color="transparent",
+                    text_color="gray75",
+                    hover_color="gray25"
+                )
+                doc_button.pack(fill="x", padx=(20, 5))
+
+    def view_document(self, folder_path, document):
+        """Open the selected document"""
+        try:
+            doc_path = os.path.join(folder_path, document)
+            if os.path.exists(doc_path):
+                # Use the default application to open the file
+                os.startfile(doc_path)
+            else:
+                messagebox.showerror("Error", "Document not found")
+        except Exception as e:
+            messagebox.showerror("Error", f"Error opening document: {str(e)}")
+
+    def setup_logging(self):
+        """Configure logging to both file and custom handler"""
+        # Initialize log messages list first
+        self.log_messages = []
+        
+        class CustomHandler(logging.Handler):
+            def __init__(self, log_messages):
+                super().__init__()
+                self.log_messages = log_messages
+
+            def emit(self, record):
+                log_entry = self.format(record)
+                self.log_messages.append(log_entry)
+
+        # Add custom handler to existing logger
+        try:
+            custom_handler = CustomHandler(self.log_messages)
+            custom_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+            self.doc_processor.logger.addHandler(custom_handler)
+        except Exception as e:
+            print(f"Error setting up logging: {str(e)}")
+
+    def log_message(self, message):
+        """Log message without updating UI"""
+        # Just print to console instead of updating UI
+        print(f"Log: {message}")
+
+    def update_progress(self, current, total, file_path):
+        """Update progress bar and label"""
+        progress = current / total
+        self.progress_bar.set(progress)
+        self.progress_label.configure(
+            text=f"Processing {os.path.basename(file_path)} ({current}/{total})"
+        )
+        self.update()
 
     def select_folder(self, folder_name):
         """Handle folder selection"""
@@ -304,7 +654,10 @@ class DocumentProcessorUI(ctk.CTk):
     def create_header(self):
         """Create header section with logo, title and description"""
         header_frame = ctk.CTkFrame(self.main_content)
-        header_frame.pack(fill="x", padx=10, pady=(0, 20))
+        header_frame.grid(row=0, column=0, sticky="ew", padx=10, pady=(0, 10))
+        
+        # Configure header layout
+        header_frame.grid_columnconfigure(0, weight=1)
         
         # Create logo frame
         logo_frame = ctk.CTkFrame(header_frame, fg_color="transparent")
@@ -312,17 +665,37 @@ class DocumentProcessorUI(ctk.CTk):
         
         # Load and display logo
         try:
-            logo_image = Image.open(self.logo_path)
-            # Resize logo to appropriate size (e.g., 200px width)
-            logo_width = 200
-            aspect_ratio = logo_image.height / logo_image.width
-            logo_height = int(logo_width * aspect_ratio)
-            logo_image = logo_image.resize((logo_width, logo_height))
-            logo_photo = ctk.CTkImage(light_image=logo_image, dark_image=logo_image, size=(logo_width, logo_height))
-            logo_label = ctk.CTkLabel(logo_frame, image=logo_photo, text="")
-            logo_label.pack(pady=(0, 10))
+            if os.path.exists(self.logo_path):
+                logo_image = Image.open(self.logo_path)
+                # Resize logo to appropriate size (e.g., 200px width)
+                logo_width = 200
+                aspect_ratio = logo_image.height / logo_image.width
+                logo_height = int(logo_width * aspect_ratio)
+                logo_image = logo_image.resize((logo_width, logo_height))
+                logo_photo = ctk.CTkImage(light_image=logo_image, dark_image=logo_image, size=(logo_width, logo_height))
+                logo_label = ctk.CTkLabel(logo_frame, image=logo_photo, text="")
+                logo_label.pack(pady=(0, 10))
+            else:
+                # Create a simple text label if logo is not found
+                self.log_message(f"Logo not found at: {self.logo_path}")
+                logo_label = ctk.CTkLabel(
+                    logo_frame, 
+                    text="TwinRain", 
+                    font=ctk.CTkFont(size=28, weight="bold"),
+                    text_color="#1f538d"
+                )
+                logo_label.pack(pady=(0, 10))
         except Exception as e:
+            # Handle any errors during logo loading
             self.log_message(f"Error loading logo: {str(e)}")
+            # Create text label as fallback
+            logo_label = ctk.CTkLabel(
+                logo_frame, 
+                text="TwinRain", 
+                font=ctk.CTkFont(size=28, weight="bold"),
+                text_color="#1f538d"
+            )
+            logo_label.pack(pady=(0, 10))
         
         title = ctk.CTkLabel(
             header_frame, 
@@ -339,327 +712,18 @@ class DocumentProcessorUI(ctk.CTk):
         )
         description.pack(pady=(0, 10))
 
-    def create_input_fields(self):
-        """Create input fields section"""
-        fields_container = ctk.CTkFrame(self.main_content)
-        fields_container.pack(fill="x", padx=10, pady=(0, 20))
-        
-        # Title for the section
-        title = ctk.CTkLabel(
-            fields_container,
-            text="Document Information",
-            font=ctk.CTkFont(size=16, weight="bold")
-        )
-        title.pack(pady=(10, 15))
-
-        # Create a regular frame instead of scrollable frame
-        fields_frame = ctk.CTkFrame(fields_container)
-        fields_frame.pack(fill="x", padx=10, pady=(0, 10))
-
-        self.entries = {}
-        for keyword, prompt in self.doc_processor.keywords_prompts.items():
-            field_frame = ctk.CTkFrame(fields_frame)
-            field_frame.pack(fill="x", padx=5, pady=5)
-            
-            label = ctk.CTkLabel(
-                field_frame,
-                text=prompt,
-                font=ctk.CTkFont(size=12),
-                width=200,
-                anchor="w"
-            )
-            label.pack(side="left", padx=(10, 5))
-            
-            # Special handling for closing date and time
-            if keyword == "*ADD DD*":
-                # Create date picker
-                date_frame = ctk.CTkFrame(field_frame)
-                date_frame.pack(side="left", fill="x", expand=True, padx=(5, 10))
-                
-                date_picker = DateEntry(date_frame, width=20, background='darkblue',
-                                    foreground='white', borderwidth=2)
-                date_picker.pack(side="left", padx=5, pady=5)
-                self.entries[keyword] = date_picker
-                
-            elif keyword == "*C&T*":
-                # Create time picker frame
-                time_frame = ctk.CTkFrame(field_frame)
-                time_frame.pack(side="left", fill="x", expand=True, padx=(5, 10))
-                
-                # Hours entry field
-                hour_var = tk.StringVar(value="01")
-                hour_entry = ctk.CTkEntry(
-                    time_frame,
-                    textvariable=hour_var,
-                    width=50,
-                    height=35,
-                    font=ctk.CTkFont(size=12),
-                    placeholder_text="HH"
-                )
-                hour_entry.pack(side="left", padx=2)
-                
-                # Separator label
-                separator = ctk.CTkLabel(
-                    time_frame,
-                    text=":",
-                    font=ctk.CTkFont(size=14, weight="bold"),
-                    width=10
-                )
-                separator.pack(side="left")
-                
-                # Minutes entry field
-                minute_var = tk.StringVar(value="00")
-                minute_entry = ctk.CTkEntry(
-                    time_frame,
-                    textvariable=minute_var,
-                    width=50,
-                    height=35,
-                    font=ctk.CTkFont(size=12),
-                    placeholder_text="MM"
-                )
-                minute_entry.pack(side="left", padx=2)
-                
-                # AM/PM picker
-                ampm_var = tk.StringVar(value="PM")
-                ampm_menu = ctk.CTkOptionMenu(
-                    time_frame,
-                    variable=ampm_var,
-                    values=["AM", "PM"],
-                    width=70,
-                    height=35,
-                    font=ctk.CTkFont(size=12)
-                )
-                ampm_menu.pack(side="left", padx=2)
-                
-                self.entries[keyword] = (hour_var, minute_var, ampm_var)
-            else:
-                # Regular text entry for other fields
-                entry = ctk.CTkEntry(
-                    field_frame,
-                    placeholder_text=f"Enter {prompt.lower().strip(': ')}",
-                    height=35,
-                    font=ctk.CTkFont(size=12)
-                )
-                entry.pack(side="left", fill="x", expand=True, padx=(5, 10))
-                self.entries[keyword] = entry
-
-    def create_progress_section(self):
-        """Create progress section"""
-        progress_frame = ctk.CTkFrame(self.main_content)
-        progress_frame.pack(fill="x", padx=10, pady=(0, 20))
-        
-        self.progress_label = ctk.CTkLabel(
-            progress_frame,
-            text="Ready to process documents",
-            font=ctk.CTkFont(size=12)
-        )
-        self.progress_label.pack(pady=5)
-        
-        self.progress_bar = ctk.CTkProgressBar(progress_frame)
-        self.progress_bar.pack(fill="x", padx=20, pady=5)
-        self.progress_bar.set(0)
-        
-        button_frame = ctk.CTkFrame(progress_frame)
-        button_frame.pack(fill="x", pady=10)
-        
-        self.process_button = ctk.CTkButton(
-            button_frame,
-            text="Process Documents",
-            command=self.process_documents,
-            state="disabled",
-            font=ctk.CTkFont(size=14, weight="bold"),
-            height=40,
-            hover_color=("#1f538d", "#2d7bd4")
-        )
-        self.process_button.pack(pady=5)
-
+    # Empty placeholder methods to maintain compatibility
     def create_collapsible_log(self):
-        """Create collapsible log section"""
-        # Create frame for log toggle button
-        toggle_frame = ctk.CTkFrame(self.main_content)
-        toggle_frame.pack(fill="x", padx=10, pady=(0, 5))
-        
-        # Add toggle button
-        self.log_visible = False
-        self.toggle_button = ctk.CTkButton(
-            toggle_frame,
-            text="Show Processing Log ▼",
-            command=self.toggle_log,
-            height=30,
-            font=ctk.CTkFont(size=12),
-            fg_color="gray25",
-            hover_color="gray35"
-        )
-        self.toggle_button.pack(side="right", padx=5, pady=5)
-        
-        # Create log frame (hidden by default)
-        self.log_frame = ctk.CTkFrame(self.main_content)
-        
-        # Create log content
-        log_label = ctk.CTkLabel(
-            self.log_frame,
-            text="Processing Log",
-            font=ctk.CTkFont(size=16, weight="bold")
-        )
-        log_label.pack(pady=5)
-        
-        self.log_text = ctk.CTkTextbox(
-            self.log_frame,
-            height=150,
-            font=ctk.CTkFont(size=12, family="Courier"),
-            wrap="word"
-        )
-        self.log_text.pack(fill="x", padx=10, pady=(0, 10))
+        """Placeholder method to maintain compatibility"""
+        pass
 
     def toggle_log(self):
-        """Toggle the visibility of the log section"""
-        if self.log_visible:
-            self.log_frame.pack_forget()
-            self.toggle_button.configure(text="Show Processing Log ▼")
-        else:
-            self.log_frame.pack(fill="x", padx=10, pady=(0, 20))
-            self.toggle_button.configure(text="Hide Processing Log ▲")
-        self.log_visible = not self.log_visible
-
-    def create_sidebar_content(self):
-        """Create sidebar with both Printable Documents and Resumes sections"""
-        # Create scrollable frame for all content
-        self.sidebar_scroll = ctk.CTkScrollableFrame(
-            self.sidebar,
-            fg_color="transparent"
-        )
-        self.sidebar_scroll.pack(fill="both", expand=True, padx=5, pady=5)
-
-        # Create Printable Documents section
-        self.create_document_section(
-            "Printable Documents",
-            self.printable_docs_path,
-            self.sidebar_scroll
-        )
-
-        # Add separator
-        separator = ctk.CTkFrame(
-            self.sidebar_scroll,
-            height=2,
-            fg_color=("gray75", "gray25")
-        )
-        separator.pack(fill="x", padx=5, pady=15)
-
-        # Create Resumes section
-        self.create_document_section(
-            "Resumes",
-            self.resumes_path,
-            self.sidebar_scroll
-        )
-
-    def create_document_section(self, title, path, parent):
-        """Create a section in the sidebar for documents"""
-        # Section title
-        section_title = ctk.CTkLabel(
-            parent,
-            text=title,
-            font=ctk.CTkFont(size=16, weight="bold")
-        )
-        section_title.pack(fill="x", pady=(10, 15))
-
-        # Get list of folders
-        try:
-            folders = [f for f in os.listdir(path) 
-                      if os.path.isdir(os.path.join(path, f))]
-        except Exception as e:
-            self.log_message(f"Error accessing {title}: {str(e)}")
-            return
-
-        for folder in folders:
-            # Folder label with background
-            folder_label_frame = ctk.CTkFrame(parent)
-            folder_label_frame.pack(fill="x", padx=5, pady=(10, 5))
-            
-            label = ctk.CTkLabel(
-                folder_label_frame,
-                text=folder,
-                font=ctk.CTkFont(size=12, weight="bold"),
-                anchor="w"
-            )
-            label.pack(fill="x", padx=10, pady=5)
-            
-            # Get documents in this folder
-            folder_path = os.path.join(path, folder)
-            documents = [f for f in os.listdir(folder_path) 
-                       if f.endswith(('.pdf', '.docx'))]  # Support both PDF and Word
-            
-            # Create document buttons
-            for doc in documents:
-                doc_frame = ctk.CTkFrame(parent, fg_color="transparent")
-                doc_frame.pack(fill="x", padx=5, pady=2)
-                
-                # Add icon based on file type
-                icon = "📄 " if doc.endswith('.pdf') else "📝 "
-                
-                doc_button = ctk.CTkButton(
-                    doc_frame,
-                    text=f"{icon}{doc}",
-                    command=lambda f=folder_path, d=doc: self.view_document(f, d),
-                    anchor="w",
-                    font=ctk.CTkFont(size=11),
-                    height=30,
-                    fg_color="transparent",
-                    text_color="gray75",
-                    hover_color="gray25"
-                )
-                doc_button.pack(fill="x", padx=(20, 5))
-
-    def view_document(self, folder_path, document):
-        """Open the selected document"""
-        try:
-            doc_path = os.path.join(folder_path, document)
-            if os.path.exists(doc_path):
-                # Use the default application to open the file
-                os.startfile(doc_path)
-            else:
-                messagebox.showerror("Error", "Document not found")
-        except Exception as e:
-            messagebox.showerror("Error", f"Error opening document: {str(e)}")
-
-    def setup_logging(self):
-        """Configure logging to both file and custom handler"""
-        self.log_messages = []
+        """Placeholder method to maintain compatibility"""
+        pass
         
-        class CustomHandler(logging.Handler):
-            def __init__(self, log_messages):
-                super().__init__()
-                self.log_messages = log_messages
-
-            def emit(self, record):
-                log_entry = self.format(record)
-                self.log_messages.append(log_entry)
-
-        # Add custom handler to existing logger
-        custom_handler = CustomHandler(self.log_messages)
-        custom_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
-        self.doc_processor.logger.addHandler(custom_handler)
-
-    def log_message(self, message):
-        """Add message to log display"""
-        self.log_messages.append(message)
-        self.update_log_display()
-
     def update_log_display(self):
-        """Update the log display with latest messages"""
-        self.log_text.delete('1.0', 'end')
-        for message in self.log_messages[-100:]:  # Show last 100 messages
-            self.log_text.insert('end', message + '\n')
-        self.log_text.see('end')  # Scroll to bottom
-        self.update()
-
-    def update_progress(self, current, total, file_path):
-        """Update progress bar and label"""
-        progress = current / total
-        self.progress_bar.set(progress)
-        self.progress_label.configure(
-            text=f"Processing {os.path.basename(file_path)} ({current}/{total})"
-        )
-        self.update()
+        """Placeholder method to maintain compatibility"""
+        pass
 
 if __name__ == "__main__":
     app = DocumentProcessorUI()
