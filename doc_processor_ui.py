@@ -542,9 +542,24 @@ class DocumentProcessorUI(ctk.CTk):
                 replacements,
                 self.update_progress
             )
-
+            
             if result:
-                self.handle_success(result)
+                output_dir = result['output_directory']
+                final_pdf = result['final_pdf']
+                word_docs = result['word_documents']
+                
+                # Show success message with file information
+                self.log_message(f"\nProcessing complete!")
+                self.log_message(f"Output directory: {output_dir}")
+                self.log_message(f"Final PDF: {os.path.basename(final_pdf)} (does not include cover page or TOC)")
+                if word_docs:
+                    self.log_message(f"Cover page and TOC from Extras folder (kept as Word docs only): {', '.join(word_docs)}")
+                else:
+                    self.log_message(f"No cover page or TOC found in Extras folder")
+                
+                # Open output folder
+                if os.path.exists(output_dir):
+                    os.startfile(output_dir)
             else:
                 self.handle_failure()
 

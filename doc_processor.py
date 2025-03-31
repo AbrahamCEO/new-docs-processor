@@ -665,6 +665,11 @@ class DocumentProcessor:
             # Clean project name and procurement ref for folder names
             project_name = project_name.replace('/', '-').replace('\\', '-').strip()
             procurement_ref = procurement_ref.replace('/', '-').replace('\\', '-').strip()
+
+            # Truncate to prevent long path issues
+            max_name_length = 50  # Maximum allowed characters for each part
+            project_name = project_name[:max_name_length].rstrip('-').strip()
+            procurement_ref = procurement_ref[:max_name_length].rstrip('-').strip()
             
             # Set up output directory using Desktop/RFQ Automation
             desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop')
@@ -739,28 +744,55 @@ class DocumentProcessor:
                 output_word = os.path.join(project_dir, os.path.basename(doc_path))
                 all_docs_to_process.append((doc_path, output_word, replacements))
 
+            # Also prepare extras documents for processing
+            for doc_path in extras_docs:
+                output_word = os.path.join(project_dir, os.path.basename(doc_path))
+                all_docs_to_process.append((doc_path, output_word, replacements))
+
             # Process all documents asynchronously
-            self.logger.info(f"Processing {len(all_docs)} documents...")
+            self.logger.info(f"Processing {len(all_docs_to_process)} documents...")
             asyncio.run(self.process_documents_async(all_docs_to_process))
 
             # Convert processed documents to PDF
             for doc_info in all_docs_to_process:
                 _, output_word, _ = doc_info
+                original_path = doc_info[0]
+                
+                # If this is one of the first two Extras files (cover page and TOC), skip PDF conversion
+                if "Extras" in original_path and original_path in extras_docs[:2]:
+                    self.logger.info(f"Skipping PDF conversion for Extras file: {output_word}")
+                    continue
+                    
                 output_pdf = os.path.join(project_dir, 
-                                      os.path.splitext(os.path.basename(output_word))[0] + '.pdf')
+                                    os.path.splitext(os.path.basename(output_word))[0] + '.pdf')
                 if self.convert_to_pdf(output_word, output_pdf):
                     pdf_files.append(output_pdf)
                     self.logger.info(f"Created PDF: {output_pdf}")
                 else:
                     self.logger.error(f"Failed to create PDF for {output_word}")
-                try:
-                    os.remove(output_word)
-                    self.logger.info(f"Removed intermediate Word file: {output_word}")
-                except Exception as e:
-                    self.logger.error(f"Error removing Word file: {str(e)}")
                 processed_files += 1
                 if progress_callback:
                     progress_callback(processed_files, total_files, output_pdf)
+
+            # Delete unnecessary Word documents (keep only extras cover page and TOC)
+            for i, doc_info in enumerate(all_docs_to_process):
+                _, output_word, _ = doc_info
+                # Extract the original source file path
+                original_path = doc_info[0]
+                
+                # Check if the file is from the Extras folder
+                if "Extras" in original_path:
+                    # If it's one of the first two Extras files (cover page and TOC)
+                    if original_path in extras_docs[:2]:
+                        self.logger.info(f"Keeping Extras file: {output_word}")
+                        continue
+                
+                # Delete all other Word files
+                try:
+                    os.remove(output_word)
+                    self.logger.info(f"Removed unnecessary Word file: {output_word}")
+                except Exception as e:
+                    self.logger.error(f"Error removing Word file: {str(e)}")
 
             # Merge and compress PDFs
             final_pdf = None
@@ -791,18 +823,35 @@ class DocumentProcessor:
                         final_pdf = final_pdf_path
                         self.logger.info(f"Successfully created final PDF: {final_pdf_path}")
                         
-                        # Only clean up intermediate files after confirming final PDF exists
+                        # Clean up intermediate files
                         self.logger.info("Cleaning up intermediate files...")
-                        # Remove individual PDFs
                         for pdf_file in pdf_files:
-                            if os.path.exists(pdf_file):
+                            try:
                                 os.remove(pdf_file)
                                 self.logger.info(f"Removed intermediate PDF: {pdf_file}")
+                            except Exception as e:
+                                self.logger.error(f"Error removing intermediate PDF {pdf_file}: {str(e)}")
                         
-                        # Remove temporary merged file
-                        if os.path.exists(temp_merged_path):
+                        # Remove temporary merged PDF
+                        try:
                             os.remove(temp_merged_path)
                             self.logger.info("Removed temporary merged PDF")
+                        except Exception as e:
+                            self.logger.error(f"Error removing temporary merged PDF: {str(e)}")
+                        
+                        # Keep the extras Word documents and final PDF
+                        self.logger.info("Processing complete. Keeping cover page and table of contents as Word documents only (not merged in PDF), and creating final merged PDF of all other documents.")
+                        
+                        # Get the names of just the first two Extras documents
+                        kept_extras = []
+                        for doc_path in extras_docs[:2]:
+                            kept_extras.append(os.path.basename(doc_path))
+                        
+                        return {
+                            'output_directory': project_dir,
+                            'final_pdf': final_pdf_path,
+                            'word_documents': kept_extras  # Return list of kept Word documents from extras
+                        }
                     else:
                         self.logger.error("Final PDF was not created successfully")
                         final_pdf = None
