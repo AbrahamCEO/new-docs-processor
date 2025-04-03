@@ -35,7 +35,7 @@ The following directory structure will be created automatically if it doesn't ex
 ├── public/
 │   └── assets/
 │       ├── twinrain-logo.png
-│       └── twinrain-logo.ico
+│       └── Logo.ico
 └── Documents/
     ├── Cover Letters/
     │   ├── Shitongeni/

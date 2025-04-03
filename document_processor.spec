@@ -86,7 +86,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=os.path.join(assets_dir, 'twinrain-logo.ico') if os.path.exists(os.path.join(assets_dir, 'twinrain-logo.ico')) else None,
+    icon=os.path.join(assets_dir, 'Logo.ico') if os.path.exists(os.path.join(assets_dir, 'Logo.ico')) else None,
 )
 
 coll = COLLECT(

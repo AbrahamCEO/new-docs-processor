@@ -2,7 +2,6 @@ import os
 import subprocess
 import sys
 import shutil
-from png_to_ico import png_to_ico
 from build import build_executable
 
 def check_nsis_installed():
@@ -19,36 +18,16 @@ def check_nsis_installed():
     return None
 
 def create_app_icon():
-    """Convert PNG logo to ICO format for application icon"""
-    print("\nConverting logo to ICO format...")
+    """Verify application icon exists"""
+    print("\nChecking application icon...")
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    png_path = os.path.join(base_dir, 'public', 'assets', 'twinrain-logo.png')
-    ico_path = os.path.join(base_dir, 'public', 'assets', 'twinrain-logo.ico')
+    ico_path = os.path.join(base_dir, 'public', 'assets', 'Logo.ico')
     
-    # Ensure assets directory exists
-    assets_dir = os.path.dirname(ico_path)
-    os.makedirs(assets_dir, exist_ok=True)
-    
-    if not os.path.exists(png_path):
-        print(f"Error: Logo file not found at {png_path}")
-        print("Creating placeholder logo...")
-        
-        # Create assets directory if it doesn't exist
-        if not os.path.exists(assets_dir):
-            os.makedirs(assets_dir)
-        
-        # Create a simple placeholder image
-        from PIL import Image, ImageDraw
-        img = Image.new('RGB', (256, 256), color=(30, 83, 141))  # Using TwinRain blue color
-        d = ImageDraw.Draw(img)
-        d.text((85, 120), "TwinRain", fill=(255, 255, 255))
-        img.save(png_path)
-        
-    if png_to_ico(png_path, ico_path):
-        print(f"Successfully created icon at {ico_path}")
+    if os.path.exists(ico_path):
+        print(f"ICO icon found at {ico_path}")
         return True
     else:
-        print("Failed to create icon")
+        print(f"Error: Icon file not found at {ico_path}")
         return False
 
 def build_installer(nsis_path):
@@ -172,10 +151,10 @@ def main():
         print("Failed to create required directories. Please check permissions.")
         return False
     
-    # Step 3: Create app icon
-    print("\nStep 3: Creating application icon...")
+    # Step 3: Verify app icon exists
+    print("\nStep 3: Verifying application icon...")
     if not create_app_icon():
-        print("Warning: Failed to create application icon. Continuing anyway...")
+        print("Warning: Missing application icon. The build may not work properly.")
     
     # Step 4: Check if NSIS is installed
     print("\nStep 4: Checking for NSIS installation...")

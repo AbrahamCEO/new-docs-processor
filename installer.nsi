@@ -6,9 +6,9 @@
 
 ; General Configuration
 !define APP_NAME "TwinRain Document Processor"
-!define APP_VERSION "1.0.0"
+!define APP_VERSION "1.4.7"
 !define APP_PUBLISHER "TwinRain"
-!define APP_ICO "public\assets\twinrain-logo.ico"
+!define APP_ICO "public\assets\Logo.ico"
 !define APP_EXE "TwinRain Document Processor.exe"
 
 ; Installer Configuration
