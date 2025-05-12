@@ -12,8 +12,9 @@ def build_executable():
     if os.path.exists("build"):
         shutil.rmtree("build")
     
-    # Run PyInstaller using the spec file
-    result = subprocess.run(["pyinstaller", "document_processor.spec"], 
+    # Run PyInstaller using the spec file using Python's module system
+    # This is more reliable than relying on the pyinstaller command being in PATH
+    result = subprocess.run([sys.executable, "-m", "PyInstaller", "document_processor.spec"], 
                            capture_output=True, text=True)
     
     if result.returncode != 0:

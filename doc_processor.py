@@ -684,6 +684,7 @@ class DocumentProcessor:
             # Initialize list to store all documents to process
             all_docs_to_process = []
             pdf_files = []
+            checklist_pdf = None
 
             # Process Cover Letters
             main_folder = os.path.join(self.base_paths['cover_letters'], selected_folder)
@@ -765,9 +766,15 @@ class DocumentProcessor:
                     
                 output_pdf = os.path.join(project_dir, 
                                     os.path.splitext(os.path.basename(output_word))[0] + '.pdf')
+                
                 if self.convert_to_pdf(output_word, output_pdf):
-                    pdf_files.append(output_pdf)
-                    self.logger.info(f"Created PDF: {output_pdf}")
+                    # Check if this is the Tender and RFQ Checklist
+                    if "Tender and RFQ Checklist" in output_pdf:
+                        checklist_pdf = output_pdf
+                        self.logger.info(f"Created Checklist PDF (will be kept separate): {output_pdf}")
+                    else:
+                        pdf_files.append(output_pdf)
+                        self.logger.info(f"Created PDF: {output_pdf}")
                 else:
                     self.logger.error(f"Failed to create PDF for {output_word}")
                 processed_files += 1
@@ -847,9 +854,11 @@ class DocumentProcessor:
                         for doc_path in extras_docs[:2]:
                             kept_extras.append(os.path.basename(doc_path))
                         
+                        # Add the checklist PDF to the return dictionary
                         return {
                             'output_directory': project_dir,
                             'final_pdf': final_pdf_path,
+                            'checklist_pdf': checklist_pdf,
                             'word_documents': kept_extras  # Return list of kept Word documents from extras
                         }
                     else:
@@ -868,7 +877,8 @@ class DocumentProcessor:
             return {
                 'total': total_files,
                 'output_directory': project_dir,
-                'final_pdf': final_pdf
+                'final_pdf': final_pdf,
+                'checklist_pdf': checklist_pdf
             }
 
         except Exception as e:

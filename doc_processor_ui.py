@@ -546,12 +546,18 @@ class DocumentProcessorUI(ctk.CTk):
             if result:
                 output_dir = result['output_directory']
                 final_pdf = result['final_pdf']
-                word_docs = result['word_documents']
+                word_docs = result.get('word_documents', [])
+                checklist_pdf = result.get('checklist_pdf')
                 
                 # Show success message with file information
                 self.log_message(f"\nProcessing complete!")
                 self.log_message(f"Output directory: {output_dir}")
                 self.log_message(f"Final PDF: {os.path.basename(final_pdf)} (does not include cover page or TOC)")
+                
+                # Display information about the separate checklist PDF
+                if checklist_pdf:
+                    self.log_message(f"Tender and RFQ Checklist PDF kept separate: {os.path.basename(checklist_pdf)}")
+                
                 if word_docs:
                     self.log_message(f"Cover page and TOC from Extras folder (kept as Word docs only): {', '.join(word_docs)}")
                 else:
@@ -630,6 +636,11 @@ class DocumentProcessorUI(ctk.CTk):
         )
         if result.get('final_pdf'):
             self.log_message(f"Final PDF created: {os.path.basename(result['final_pdf'])}")
+        
+        # Log about the separate Tender and RFQ Checklist PDF
+        if result.get('checklist_pdf'):
+            self.log_message(f"Tender and RFQ Checklist PDF kept separate: {os.path.basename(result['checklist_pdf'])}")
+        
         messagebox.showinfo(
             "Success",
             f"Documents processed successfully!\nOutput directory: {result['output_directory']}"
