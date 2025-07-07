@@ -634,7 +634,7 @@ class DocumentProcessor:
             tasks.append(task)
         return await asyncio.gather(*tasks)
 
-    def process_documents(self, selected_folder=None, replacements=None, progress_callback=None):
+    def process_documents(self, selected_folder=None, replacements=None, progress_callback=None, include_undertaking=False):
         """Process documents based on selected folder"""
         try:
             # Set default folder to "Shitongeni" if none is specified
@@ -693,8 +693,19 @@ class DocumentProcessor:
                 if "Extras" not in root:  # Skip extras folder
                     for file in files:
                         if file.endswith('.docx'):
-                            order = self.get_doc_order(file)
-                            cover_letter_docs.append((order, os.path.join(root, file)))
+                            # Check if this is the optional undertaking document
+                            if "Undertaking - Eligibility" in file:
+                                # Only include if the checkbox is checked
+                                if include_undertaking:
+                                    order = self.get_doc_order(file)
+                                    cover_letter_docs.append((order, os.path.join(root, file)))
+                                    self.logger.info(f"Including optional document: {file}")
+                                else:
+                                    self.logger.info(f"Skipping optional document: {file}")
+                            else:
+                                # Include all other documents
+                                order = self.get_doc_order(file)
+                                cover_letter_docs.append((order, os.path.join(root, file)))
             
             # Process Resumes
             resume_folder = os.path.join(self.base_paths['resumes'], selected_folder)

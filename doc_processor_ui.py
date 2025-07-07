@@ -255,6 +255,25 @@ class DocumentProcessorUI(ctk.CTk):
                 entry.pack(side="left", fill="x", expand=True, padx=(5, 10))
                 self.entries[keyword] = entry
 
+        # Add checkbox for optional Undertaking - Eligibility document
+        checkbox_frame = ctk.CTkFrame(fields_frame)
+        checkbox_frame.pack(fill="x", padx=5, pady=10)
+        
+        # Create checkbox variable
+        self.include_undertaking_var = ctk.BooleanVar(value=False)
+        
+        # Create checkbox
+        self.undertaking_checkbox = ctk.CTkCheckBox(
+            checkbox_frame,
+            text="Include Undertaking - Eligibility Document (Optional)",
+            variable=self.include_undertaking_var,
+            font=ctk.CTkFont(size=12, weight="bold"),
+            text_color=("gray10", "gray90"),
+            checkbox_width=20,
+            checkbox_height=20
+        )
+        self.undertaking_checkbox.pack(side="left", padx=10, pady=5)
+
     def create_progress_section(self):
         """Create progress section"""
         progress_frame = ctk.CTkFrame(self.main_content)
@@ -536,11 +555,15 @@ class DocumentProcessorUI(ctk.CTk):
         self.set_processing_state(True)
 
         try:
+            # Get checkbox state
+            include_undertaking = self.include_undertaking_var.get()
+            
             # Process documents
             result = self.doc_processor.process_documents(
                 self.selected_folder,
                 replacements,
-                self.update_progress
+                self.update_progress,
+                include_undertaking
             )
             
             if result:

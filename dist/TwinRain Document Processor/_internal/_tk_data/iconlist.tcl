@@ -26,7 +26,7 @@
 #	<path> selection includes <item>
 #	<path> selection set <first> ?<last>?
 
-package require Tk
+package require Tk 8.6
 
 ::tk::Megawidget create ::tk::IconList ::tk::FocusableWidget {
     variable w canvas sbar accel accelCB fill font index \
@@ -697,7 +697,7 @@ package require Tk
 	    }
 	}
 
-	if {$theIndex >= 0} {
+	if {$theIndex > -1} {
 	    $w selection clear 0 end
 	    $w selection set $theIndex
 	    $w selection anchor $theIndex

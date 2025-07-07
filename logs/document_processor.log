@@ -748,3 +748,359 @@
 2025-05-12 12:13:16,533 - INFO - Removed intermediate PDF: C:\Users\Windsurf\Desktop\RFQ Automation\tender\tender (tender)\10. All Declaration.pdf
 2025-05-12 12:13:16,533 - INFO - Removed temporary merged PDF
 2025-05-12 12:13:16,534 - INFO - Processing complete. Keeping cover page and table of contents as Word documents only (not merged in PDF), and creating final merged PDF of all other documents.
+2025-07-07 08:44:39,085 - INFO - Document Processor initialized
+2025-07-07 08:44:39,085 - INFO - Log file: D:\GTAV\projects\new-docs-processor\logs\document_processor.log
+2025-07-07 08:45:14,757 - INFO - Formatted date: 7th July 2025
+2025-07-07 08:45:14,757 - INFO - Created output directory: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)
+2025-07-07 08:45:14,769 - INFO - Processing 12 documents...
+2025-07-07 08:45:14,801 - INFO - Processing document: 1. Tender and RFQ Checklist.docx
+2025-07-07 08:45:15,022 - INFO - Processing document: 10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 08:45:15,022 - INFO - Processing document: 5. Undertaking - Salaries.docx
+2025-07-07 08:45:15,038 - INFO - Processing document: 11. Cover Page.docx
+2025-07-07 08:45:15,038 - INFO - Processing document: 6. Local Content.docx
+2025-07-07 08:45:15,060 - INFO - Processing document: 9. Bid Requirements.docx
+2025-07-07 08:45:15,060 - INFO - Processing document: 2. Power Of Attorney.docx
+2025-07-07 08:45:15,085 - INFO - Processing document: 10. All Declaration.docx
+2025-07-07 08:45:15,085 - INFO - Processing document: 4. Undertaking - Labour.docx
+2025-07-07 08:45:15,095 - INFO - Processing document: 8. Conflict Of Interest.docx
+2025-07-07 08:45:15,133 - INFO - Processing document: 3. Cover Letter.docx
+2025-07-07 08:45:15,142 - INFO - Processing document: 7. Employment.docx
+2025-07-07 08:45:15,250 - INFO - Successfully saved document: 1. Tender and RFQ Checklist.docx
+2025-07-07 08:45:15,270 - INFO - Successfully saved document: 10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 08:45:15,284 - INFO - Successfully saved document: 5. Undertaking - Salaries.docx
+2025-07-07 08:45:15,307 - INFO - Successfully saved document: 6. Local Content.docx
+2025-07-07 08:45:15,309 - INFO - Successfully saved document: 8. Conflict Of Interest.docx
+2025-07-07 08:45:15,311 - INFO - Successfully saved document: 4. Undertaking - Labour.docx
+2025-07-07 08:45:15,313 - INFO - Successfully saved document: 2. Power Of Attorney.docx
+2025-07-07 08:45:15,313 - INFO - Successfully saved document: 9. Bid Requirements.docx
+2025-07-07 08:45:15,313 - INFO - Successfully saved document: 10. All Declaration.docx
+2025-07-07 08:45:15,313 - INFO - Successfully saved document: 7. Employment.docx
+2025-07-07 08:45:15,330 - INFO - Successfully saved document: 3. Cover Letter.docx
+2025-07-07 08:45:15,330 - INFO - Successfully saved document: 11. Cover Page.docx
+2025-07-07 08:45:57,768 - INFO - Created Checklist PDF (will be kept separate): C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\1. Tender and RFQ Checklist.pdf
+2025-07-07 08:46:00,490 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\2. Power Of Attorney.pdf
+2025-07-07 08:46:02,032 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\3. Cover Letter.pdf
+2025-07-07 08:46:04,852 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\4. Undertaking - Labour.pdf
+2025-07-07 08:46:07,374 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\5. Undertaking - Salaries.pdf
+2025-07-07 08:46:10,310 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\6. Local Content.pdf
+2025-07-07 08:46:13,008 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\7. Employment.pdf
+2025-07-07 08:46:15,335 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\8. Conflict Of Interest.pdf
+2025-07-07 08:46:17,668 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\9. Bid Requirements.pdf
+2025-07-07 08:46:20,214 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\10. All Declaration.pdf
+2025-07-07 08:46:20,214 - INFO - Skipping PDF conversion for Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 08:46:20,214 - INFO - Skipping PDF conversion for Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\11. Cover Page.docx
+2025-07-07 08:46:20,214 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\1. Tender and RFQ Checklist.docx
+2025-07-07 08:46:20,214 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\2. Power Of Attorney.docx
+2025-07-07 08:46:20,214 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\3. Cover Letter.docx
+2025-07-07 08:46:20,214 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\4. Undertaking - Labour.docx
+2025-07-07 08:46:20,214 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\5. Undertaking - Salaries.docx
+2025-07-07 08:46:20,214 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\6. Local Content.docx
+2025-07-07 08:46:20,214 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\7. Employment.docx
+2025-07-07 08:46:20,214 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\8. Conflict Of Interest.docx
+2025-07-07 08:46:20,214 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\9. Bid Requirements.docx
+2025-07-07 08:46:20,214 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\10. All Declaration.docx
+2025-07-07 08:46:20,214 - INFO - Keeping Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 08:46:20,214 - INFO - Keeping Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\11. Cover Page.docx
+2025-07-07 08:46:20,230 - INFO - Merging 9 PDFs...
+2025-07-07 08:46:21,133 - INFO - Successfully created final PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\hhth (thhtt).pdf
+2025-07-07 08:46:21,133 - INFO - Cleaning up intermediate files...
+2025-07-07 08:46:21,133 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\2. Power Of Attorney.pdf
+2025-07-07 08:46:21,133 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\3. Cover Letter.pdf
+2025-07-07 08:46:21,133 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\4. Undertaking - Labour.pdf
+2025-07-07 08:46:21,133 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\5. Undertaking - Salaries.pdf
+2025-07-07 08:46:21,149 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\6. Local Content.pdf
+2025-07-07 08:46:21,149 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\7. Employment.pdf
+2025-07-07 08:46:21,149 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\8. Conflict Of Interest.pdf
+2025-07-07 08:46:21,149 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\9. Bid Requirements.pdf
+2025-07-07 08:46:21,149 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ttthh\hhth (thhtt)\10. All Declaration.pdf
+2025-07-07 08:46:21,149 - INFO - Removed temporary merged PDF
+2025-07-07 08:46:21,149 - INFO - Processing complete. Keeping cover page and table of contents as Word documents only (not merged in PDF), and creating final merged PDF of all other documents.
+2025-07-07 08:52:17,384 - INFO - Document Processor initialized
+2025-07-07 08:52:17,386 - INFO - Log file: D:\GTAV\projects\new-docs-processor\logs\document_processor.log
+2025-07-07 08:53:17,981 - INFO - Formatted date: 7th July 2025
+2025-07-07 08:53:17,998 - INFO - Created output directory: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)
+2025-07-07 08:53:17,998 - INFO - Processing 13 documents...
+2025-07-07 08:53:18,064 - INFO - Processing document: 1. Tender and RFQ Checklist.docx
+2025-07-07 08:53:18,297 - INFO - Processing document: 2. Power Of Attorney.docx
+2025-07-07 08:53:18,298 - INFO - Processing document: 10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 08:53:18,298 - INFO - Processing document: 10. All Declaration.docx
+2025-07-07 08:53:18,314 - INFO - Processing document: 11. Cover Page.docx
+2025-07-07 08:53:18,333 - INFO - Processing document: 7. Employment.docx
+2025-07-07 08:53:18,340 - INFO - Processing document: 3. Cover Letter.docx
+2025-07-07 08:53:18,364 - INFO - Processing document: 9. Bid Requirements.docx
+2025-07-07 08:53:18,364 - INFO - Processing document: 6. Local Content.docx
+2025-07-07 08:53:18,392 - INFO - Processing document: 8. Conflict Of Interest.docx
+2025-07-07 08:53:18,392 - INFO - Processing document: 11. Undertaking - Eligibility - Shitongei.docx
+2025-07-07 08:53:18,398 - INFO - Processing document: 5. Undertaking - Salaries.docx
+2025-07-07 08:53:18,416 - INFO - Processing document: 4. Undertaking - Labour.docx
+2025-07-07 08:53:18,560 - INFO - Successfully saved document: 1. Tender and RFQ Checklist.docx
+2025-07-07 08:53:18,602 - INFO - Successfully saved document: 10. All Declaration.docx
+2025-07-07 08:53:18,604 - INFO - Successfully saved document: 2. Power Of Attorney.docx
+2025-07-07 08:53:18,632 - INFO - Successfully saved document: 6. Local Content.docx
+2025-07-07 08:53:18,635 - INFO - Successfully saved document: 11. Cover Page.docx
+2025-07-07 08:53:18,641 - INFO - Successfully saved document: 8. Conflict Of Interest.docx
+2025-07-07 08:53:18,654 - INFO - Successfully saved document: 10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 08:53:18,656 - INFO - Successfully saved document: 7. Employment.docx
+2025-07-07 08:53:18,658 - INFO - Successfully saved document: 9. Bid Requirements.docx
+2025-07-07 08:53:18,660 - INFO - Successfully saved document: 5. Undertaking - Salaries.docx
+2025-07-07 08:53:18,664 - INFO - Successfully saved document: 4. Undertaking - Labour.docx
+2025-07-07 08:53:18,672 - INFO - Successfully saved document: 11. Undertaking - Eligibility - Shitongei.docx
+2025-07-07 08:53:18,672 - INFO - Successfully saved document: 3. Cover Letter.docx
+2025-07-07 08:53:22,147 - INFO - Created Checklist PDF (will be kept separate): C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\1. Tender and RFQ Checklist.pdf
+2025-07-07 08:53:24,364 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\2. Power Of Attorney.pdf
+2025-07-07 08:53:27,181 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\3. Cover Letter.pdf
+2025-07-07 08:53:29,413 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\4. Undertaking - Labour.pdf
+2025-07-07 08:53:31,681 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\5. Undertaking - Salaries.pdf
+2025-07-07 08:53:34,413 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\6. Local Content.pdf
+2025-07-07 08:53:36,613 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\7. Employment.pdf
+2025-07-07 08:53:38,812 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\8. Conflict Of Interest.pdf
+2025-07-07 08:53:41,080 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\9. Bid Requirements.pdf
+2025-07-07 08:53:43,281 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\10. All Declaration.pdf
+2025-07-07 08:53:45,581 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\11. Undertaking - Eligibility - Shitongei.pdf
+2025-07-07 08:53:45,586 - INFO - Skipping PDF conversion for Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 08:53:45,586 - INFO - Skipping PDF conversion for Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\11. Cover Page.docx
+2025-07-07 08:53:45,586 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\1. Tender and RFQ Checklist.docx
+2025-07-07 08:53:45,586 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\2. Power Of Attorney.docx
+2025-07-07 08:53:45,586 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\3. Cover Letter.docx
+2025-07-07 08:53:45,586 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\4. Undertaking - Labour.docx
+2025-07-07 08:53:45,586 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\5. Undertaking - Salaries.docx
+2025-07-07 08:53:45,586 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\6. Local Content.docx
+2025-07-07 08:53:45,586 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\7. Employment.docx
+2025-07-07 08:53:45,586 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\8. Conflict Of Interest.docx
+2025-07-07 08:53:45,595 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\9. Bid Requirements.docx
+2025-07-07 08:53:45,595 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\10. All Declaration.docx
+2025-07-07 08:53:45,596 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\11. Undertaking - Eligibility - Shitongei.docx
+2025-07-07 08:53:45,597 - INFO - Keeping Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 08:53:45,597 - INFO - Keeping Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\11. Cover Page.docx
+2025-07-07 08:53:45,597 - INFO - Merging 10 PDFs...
+2025-07-07 08:53:46,714 - INFO - Successfully created final PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\rere (rerre).pdf
+2025-07-07 08:53:46,714 - INFO - Cleaning up intermediate files...
+2025-07-07 08:53:46,714 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\2. Power Of Attorney.pdf
+2025-07-07 08:53:46,714 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\3. Cover Letter.pdf
+2025-07-07 08:53:46,714 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\4. Undertaking - Labour.pdf
+2025-07-07 08:53:46,714 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\5. Undertaking - Salaries.pdf
+2025-07-07 08:53:46,714 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\6. Local Content.pdf
+2025-07-07 08:53:46,714 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\7. Employment.pdf
+2025-07-07 08:53:46,714 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\8. Conflict Of Interest.pdf
+2025-07-07 08:53:46,714 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\9. Bid Requirements.pdf
+2025-07-07 08:53:46,714 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\10. All Declaration.pdf
+2025-07-07 08:53:46,714 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eere\rere (rerre)\11. Undertaking - Eligibility - Shitongei.pdf
+2025-07-07 08:53:46,714 - INFO - Removed temporary merged PDF
+2025-07-07 08:53:46,714 - INFO - Processing complete. Keeping cover page and table of contents as Word documents only (not merged in PDF), and creating final merged PDF of all other documents.
+2025-07-07 09:01:11,243 - INFO - Document Processor initialized
+2025-07-07 09:01:11,243 - INFO - Log file: D:\GTAV\projects\new-docs-processor\logs\document_processor.log
+2025-07-07 09:01:45,538 - INFO - Formatted date: 7th July 2025
+2025-07-07 09:01:45,538 - INFO - Created output directory: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)
+2025-07-07 09:01:45,538 - INFO - Skipping optional document: 11. Undertaking - Eligibility - Shitongei.docx
+2025-07-07 09:01:45,538 - INFO - Processing 12 documents...
+2025-07-07 09:01:45,587 - INFO - Processing document: 1. Tender and RFQ Checklist.docx
+2025-07-07 09:01:45,771 - INFO - Processing document: 10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 09:01:45,771 - INFO - Processing document: 2. Power Of Attorney.docx
+2025-07-07 09:01:45,787 - INFO - Processing document: 9. Bid Requirements.docx
+2025-07-07 09:01:45,787 - INFO - Processing document: 6. Local Content.docx
+2025-07-07 09:01:45,821 - INFO - Processing document: 8. Conflict Of Interest.docx
+2025-07-07 09:01:45,821 - INFO - Processing document: 10. All Declaration.docx
+2025-07-07 09:01:45,837 - INFO - Processing document: 11. Cover Page.docx
+2025-07-07 09:01:45,854 - INFO - Processing document: 5. Undertaking - Salaries.docx
+2025-07-07 09:01:45,869 - INFO - Processing document: 4. Undertaking - Labour.docx
+2025-07-07 09:01:45,871 - INFO - Processing document: 3. Cover Letter.docx
+2025-07-07 09:01:45,887 - INFO - Processing document: 7. Employment.docx
+2025-07-07 09:01:46,034 - INFO - Successfully saved document: 1. Tender and RFQ Checklist.docx
+2025-07-07 09:01:46,044 - INFO - Successfully saved document: 10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 09:01:46,050 - INFO - Successfully saved document: 9. Bid Requirements.docx
+2025-07-07 09:01:46,055 - INFO - Successfully saved document: 2. Power Of Attorney.docx
+2025-07-07 09:01:46,059 - INFO - Successfully saved document: 6. Local Content.docx
+2025-07-07 09:01:46,066 - INFO - Successfully saved document: 5. Undertaking - Salaries.docx
+2025-07-07 09:01:46,079 - INFO - Successfully saved document: 11. Cover Page.docx
+2025-07-07 09:01:46,092 - INFO - Successfully saved document: 10. All Declaration.docx
+2025-07-07 09:01:46,092 - INFO - Successfully saved document: 7. Employment.docx
+2025-07-07 09:01:46,095 - INFO - Successfully saved document: 8. Conflict Of Interest.docx
+2025-07-07 09:01:46,095 - INFO - Successfully saved document: 4. Undertaking - Labour.docx
+2025-07-07 09:01:46,095 - INFO - Successfully saved document: 3. Cover Letter.docx
+2025-07-07 09:01:48,674 - INFO - Created Checklist PDF (will be kept separate): C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\1. Tender and RFQ Checklist.pdf
+2025-07-07 09:01:51,353 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\2. Power Of Attorney.pdf
+2025-07-07 09:01:53,887 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\3. Cover Letter.pdf
+2025-07-07 09:01:56,221 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\4. Undertaking - Labour.pdf
+2025-07-07 09:01:58,620 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\5. Undertaking - Salaries.pdf
+2025-07-07 09:02:01,004 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\6. Local Content.pdf
+2025-07-07 09:02:03,487 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\7. Employment.pdf
+2025-07-07 09:02:06,070 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\8. Conflict Of Interest.pdf
+2025-07-07 09:02:08,520 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\9. Bid Requirements.pdf
+2025-07-07 09:02:10,935 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\10. All Declaration.pdf
+2025-07-07 09:02:10,937 - INFO - Skipping PDF conversion for Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 09:02:10,937 - INFO - Skipping PDF conversion for Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\11. Cover Page.docx
+2025-07-07 09:02:10,937 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\1. Tender and RFQ Checklist.docx
+2025-07-07 09:02:10,937 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\2. Power Of Attorney.docx
+2025-07-07 09:02:10,937 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\3. Cover Letter.docx
+2025-07-07 09:02:10,937 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\4. Undertaking - Labour.docx
+2025-07-07 09:02:10,937 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\5. Undertaking - Salaries.docx
+2025-07-07 09:02:10,937 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\6. Local Content.docx
+2025-07-07 09:02:10,937 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\7. Employment.docx
+2025-07-07 09:02:10,937 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\8. Conflict Of Interest.docx
+2025-07-07 09:02:10,937 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\9. Bid Requirements.docx
+2025-07-07 09:02:10,937 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\10. All Declaration.docx
+2025-07-07 09:02:10,937 - INFO - Keeping Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 09:02:10,937 - INFO - Keeping Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\11. Cover Page.docx
+2025-07-07 09:02:10,937 - INFO - Merging 9 PDFs...
+2025-07-07 09:02:11,904 - INFO - Successfully created final PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\erer (erere).pdf
+2025-07-07 09:02:11,904 - INFO - Cleaning up intermediate files...
+2025-07-07 09:02:11,904 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\2. Power Of Attorney.pdf
+2025-07-07 09:02:11,907 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\3. Cover Letter.pdf
+2025-07-07 09:02:11,907 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\4. Undertaking - Labour.pdf
+2025-07-07 09:02:11,907 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\5. Undertaking - Salaries.pdf
+2025-07-07 09:02:11,907 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\6. Local Content.pdf
+2025-07-07 09:02:11,907 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\7. Employment.pdf
+2025-07-07 09:02:11,907 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\8. Conflict Of Interest.pdf
+2025-07-07 09:02:11,907 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\9. Bid Requirements.pdf
+2025-07-07 09:02:11,907 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\10. All Declaration.pdf
+2025-07-07 09:02:11,907 - INFO - Removed temporary merged PDF
+2025-07-07 09:02:11,907 - INFO - Processing complete. Keeping cover page and table of contents as Word documents only (not merged in PDF), and creating final merged PDF of all other documents.
+2025-07-07 09:02:42,761 - INFO - Formatted date: 7th July 2025
+2025-07-07 09:02:42,761 - INFO - Created output directory: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)
+2025-07-07 09:02:42,761 - INFO - Including optional document: 11. Undertaking - Eligibility - Shitongei.docx
+2025-07-07 09:02:42,761 - INFO - Processing 13 documents...
+2025-07-07 09:02:42,802 - INFO - Processing document: 1. Tender and RFQ Checklist.docx
+2025-07-07 09:02:43,012 - INFO - Processing document: 10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 09:02:43,012 - INFO - Processing document: 11. Cover Page.docx
+2025-07-07 09:02:43,022 - INFO - Processing document: 5. Undertaking - Salaries.docx
+2025-07-07 09:02:43,034 - INFO - Processing document: 2. Power Of Attorney.docx
+2025-07-07 09:02:43,061 - INFO - Processing document: 7. Employment.docx
+2025-07-07 09:02:43,061 - INFO - Processing document: 8. Conflict Of Interest.docx
+2025-07-07 09:02:43,070 - INFO - Processing document: 3. Cover Letter.docx
+2025-07-07 09:02:43,072 - INFO - Processing document: 11. Undertaking - Eligibility - Shitongei.docx
+2025-07-07 09:02:43,085 - INFO - Processing document: 4. Undertaking - Labour.docx
+2025-07-07 09:02:43,091 - INFO - Processing document: 6. Local Content.docx
+2025-07-07 09:02:43,091 - INFO - Processing document: 10. All Declaration.docx
+2025-07-07 09:02:43,091 - INFO - Processing document: 9. Bid Requirements.docx
+2025-07-07 09:02:43,121 - INFO - Successfully saved document: 1. Tender and RFQ Checklist.docx
+2025-07-07 09:02:43,250 - INFO - Successfully saved document: 2. Power Of Attorney.docx
+2025-07-07 09:02:43,286 - INFO - Successfully saved document: 11. Cover Page.docx
+2025-07-07 09:02:43,292 - INFO - Successfully saved document: 10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 09:02:43,292 - INFO - Successfully saved document: 9. Bid Requirements.docx
+2025-07-07 09:02:43,303 - INFO - Successfully saved document: 11. Undertaking - Eligibility - Shitongei.docx
+2025-07-07 09:02:43,307 - INFO - Successfully saved document: 8. Conflict Of Interest.docx
+2025-07-07 09:02:43,307 - INFO - Successfully saved document: 5. Undertaking - Salaries.docx
+2025-07-07 09:02:43,307 - INFO - Successfully saved document: 7. Employment.docx
+2025-07-07 09:02:43,312 - INFO - Successfully saved document: 10. All Declaration.docx
+2025-07-07 09:02:43,312 - INFO - Successfully saved document: 4. Undertaking - Labour.docx
+2025-07-07 09:02:43,312 - INFO - Successfully saved document: 6. Local Content.docx
+2025-07-07 09:02:43,322 - INFO - Successfully saved document: 3. Cover Letter.docx
+2025-07-07 09:02:47,803 - INFO - Created Checklist PDF (will be kept separate): C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\1. Tender and RFQ Checklist.pdf
+2025-07-07 09:02:51,570 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\2. Power Of Attorney.pdf
+2025-07-07 09:02:53,106 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\3. Cover Letter.pdf
+2025-07-07 09:02:55,705 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\4. Undertaking - Labour.pdf
+2025-07-07 09:02:57,044 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\5. Undertaking - Salaries.pdf
+2025-07-07 09:02:59,704 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\6. Local Content.pdf
+2025-07-07 09:03:01,062 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\7. Employment.pdf
+2025-07-07 09:03:02,508 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\8. Conflict Of Interest.pdf
+2025-07-07 09:03:05,305 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\9. Bid Requirements.pdf
+2025-07-07 09:03:08,023 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\10. All Declaration.pdf
+2025-07-07 09:03:10,702 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\11. Undertaking - Eligibility - Shitongei.pdf
+2025-07-07 09:03:10,702 - INFO - Skipping PDF conversion for Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 09:03:10,702 - INFO - Skipping PDF conversion for Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\11. Cover Page.docx
+2025-07-07 09:03:10,702 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\1. Tender and RFQ Checklist.docx
+2025-07-07 09:03:10,702 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\2. Power Of Attorney.docx
+2025-07-07 09:03:10,702 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\3. Cover Letter.docx
+2025-07-07 09:03:10,702 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\4. Undertaking - Labour.docx
+2025-07-07 09:03:10,702 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\5. Undertaking - Salaries.docx
+2025-07-07 09:03:10,702 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\6. Local Content.docx
+2025-07-07 09:03:10,702 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\7. Employment.docx
+2025-07-07 09:03:10,702 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\8. Conflict Of Interest.docx
+2025-07-07 09:03:10,702 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\9. Bid Requirements.docx
+2025-07-07 09:03:10,702 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\10. All Declaration.docx
+2025-07-07 09:03:10,702 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\11. Undertaking - Eligibility - Shitongei.docx
+2025-07-07 09:03:10,702 - INFO - Keeping Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 09:03:10,702 - INFO - Keeping Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\11. Cover Page.docx
+2025-07-07 09:03:10,702 - INFO - Merging 10 PDFs...
+2025-07-07 09:03:11,852 - INFO - Successfully created final PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\erer (erere).pdf
+2025-07-07 09:03:11,852 - INFO - Cleaning up intermediate files...
+2025-07-07 09:03:11,867 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\2. Power Of Attorney.pdf
+2025-07-07 09:03:11,868 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\3. Cover Letter.pdf
+2025-07-07 09:03:11,869 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\4. Undertaking - Labour.pdf
+2025-07-07 09:03:11,869 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\5. Undertaking - Salaries.pdf
+2025-07-07 09:03:11,869 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\6. Local Content.pdf
+2025-07-07 09:03:11,869 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\7. Employment.pdf
+2025-07-07 09:03:11,869 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\8. Conflict Of Interest.pdf
+2025-07-07 09:03:11,869 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\9. Bid Requirements.pdf
+2025-07-07 09:03:11,869 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\10. All Declaration.pdf
+2025-07-07 09:03:11,869 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\ere\erer (erere)\11. Undertaking - Eligibility - Shitongei.pdf
+2025-07-07 09:03:11,875 - INFO - Removed temporary merged PDF
+2025-07-07 09:03:11,875 - INFO - Processing complete. Keeping cover page and table of contents as Word documents only (not merged in PDF), and creating final merged PDF of all other documents.
+2025-07-07 09:05:24,508 - INFO - Document Processor initialized
+2025-07-07 09:05:24,508 - INFO - Log file: D:\GTAV\projects\new-docs-processor\logs\document_processor.log
+2025-07-07 09:05:35,083 - INFO - Formatted date: 7th July 2025
+2025-07-07 09:05:35,083 - INFO - Created output directory: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)
+2025-07-07 09:05:35,083 - INFO - Including optional document: 11. Undertaking - Eligibility - Wilson.docx
+2025-07-07 09:05:35,083 - INFO - Processing 14 documents...
+2025-07-07 09:05:35,122 - ERROR - Error processing document ~$ Tender and RFQ Checklist.docx: Package not found at 'D:\GTAV\projects\new-docs-processor\Documents\Cover Letters\Wilson\~$ Tender and RFQ Checklist.docx'
+2025-07-07 09:05:35,133 - ERROR - Error processing document 2. Power Of Attorney.docx: 'lxml.etree._Element' object has no attribute 'Relationship_lst'
+2025-07-07 09:05:35,150 - INFO - Processing document: 1. Tender and RFQ Checklist.docx
+2025-07-07 09:05:35,399 - INFO - Processing document: 10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 09:05:35,416 - INFO - Processing document: 11. Undertaking - Eligibility - Wilson.docx
+2025-07-07 09:05:35,416 - INFO - Processing document: 11. Cover Page.docx
+2025-07-07 09:05:35,431 - INFO - Processing document: 3. Cover Letter.docx
+2025-07-07 09:05:35,450 - INFO - Processing document: 7. Employment.docx
+2025-07-07 09:05:35,470 - INFO - Processing document: 6. Local Content.docx
+2025-07-07 09:05:35,472 - INFO - Processing document: 9. Bid Requirements.docx
+2025-07-07 09:05:35,483 - INFO - Processing document: 4. Undertaking - Labour.docx
+2025-07-07 09:05:35,499 - INFO - Processing document: 8. Conflict Of Interest.docx
+2025-07-07 09:05:35,499 - INFO - Processing document: 10. All Declaration.docx
+2025-07-07 09:05:35,516 - INFO - Processing document: 5. Undertaking - Salaries.docx
+2025-07-07 09:05:35,566 - INFO - Successfully saved document: 1. Tender and RFQ Checklist.docx
+2025-07-07 09:05:35,646 - INFO - Successfully saved document: 10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 09:05:35,651 - INFO - Successfully saved document: 7. Employment.docx
+2025-07-07 09:05:35,704 - INFO - Successfully saved document: 3. Cover Letter.docx
+2025-07-07 09:05:35,704 - INFO - Successfully saved document: 8. Conflict Of Interest.docx
+2025-07-07 09:05:35,707 - INFO - Successfully saved document: 11. Undertaking - Eligibility - Wilson.docx
+2025-07-07 09:05:35,707 - INFO - Successfully saved document: 10. All Declaration.docx
+2025-07-07 09:05:35,707 - INFO - Successfully saved document: 9. Bid Requirements.docx
+2025-07-07 09:05:35,707 - INFO - Successfully saved document: 6. Local Content.docx
+2025-07-07 09:05:35,707 - INFO - Successfully saved document: 4. Undertaking - Labour.docx
+2025-07-07 09:05:35,717 - INFO - Successfully saved document: 11. Cover Page.docx
+2025-07-07 09:05:35,717 - INFO - Successfully saved document: 5. Undertaking - Salaries.docx
+2025-07-07 09:05:38,395 - INFO - Created Checklist PDF (will be kept separate): C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\1. Tender and RFQ Checklist.pdf
+2025-07-07 09:05:38,469 - ERROR - Word file not found: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\2. Power Of Attorney.docx
+2025-07-07 09:05:38,469 - ERROR - Failed to create PDF for C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\2. Power Of Attorney.docx
+2025-07-07 09:05:39,975 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\3. Cover Letter.pdf
+2025-07-07 09:05:41,595 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\4. Undertaking - Labour.pdf
+2025-07-07 09:05:42,971 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\5. Undertaking - Salaries.pdf
+2025-07-07 09:05:45,579 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\6. Local Content.pdf
+2025-07-07 09:05:48,299 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\7. Employment.pdf
+2025-07-07 09:05:50,931 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\8. Conflict Of Interest.pdf
+2025-07-07 09:05:53,548 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\9. Bid Requirements.pdf
+2025-07-07 09:05:56,216 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\10. All Declaration.pdf
+2025-07-07 09:05:58,881 - INFO - Created PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\11. Undertaking - Eligibility - Wilson.pdf
+2025-07-07 09:05:58,882 - ERROR - Word file not found: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\~$ Tender and RFQ Checklist.docx
+2025-07-07 09:05:58,882 - ERROR - Failed to create PDF for C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\~$ Tender and RFQ Checklist.docx
+2025-07-07 09:05:58,891 - INFO - Skipping PDF conversion for Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 09:05:58,891 - INFO - Skipping PDF conversion for Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\11. Cover Page.docx
+2025-07-07 09:05:58,891 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\1. Tender and RFQ Checklist.docx
+2025-07-07 09:05:58,891 - ERROR - Error removing Word file: [WinError 2] The system cannot find the file specified: 'C:\\Users\\AbrahamCEO\\Desktop\\RFQ Automation\\eerre\\rere (rerre)\\2. Power Of Attorney.docx'
+2025-07-07 09:05:58,891 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\3. Cover Letter.docx
+2025-07-07 09:05:58,898 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\4. Undertaking - Labour.docx
+2025-07-07 09:05:58,898 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\5. Undertaking - Salaries.docx
+2025-07-07 09:05:58,899 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\6. Local Content.docx
+2025-07-07 09:05:58,899 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\7. Employment.docx
+2025-07-07 09:05:58,899 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\8. Conflict Of Interest.docx
+2025-07-07 09:05:58,899 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\9. Bid Requirements.docx
+2025-07-07 09:05:58,899 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\10. All Declaration.docx
+2025-07-07 09:05:58,899 - INFO - Removed unnecessary Word file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\11. Undertaking - Eligibility - Wilson.docx
+2025-07-07 09:05:58,899 - ERROR - Error removing Word file: [WinError 2] The system cannot find the file specified: 'C:\\Users\\AbrahamCEO\\Desktop\\RFQ Automation\\eerre\\rere (rerre)\\~$ Tender and RFQ Checklist.docx'
+2025-07-07 09:05:58,899 - INFO - Keeping Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\10. Twinrain Table of Contents Section Covers.docx
+2025-07-07 09:05:58,899 - INFO - Keeping Extras file: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\11. Cover Page.docx
+2025-07-07 09:05:58,899 - INFO - Merging 9 PDFs...
+2025-07-07 09:05:59,832 - INFO - Successfully created final PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\rere (rerre).pdf
+2025-07-07 09:05:59,832 - INFO - Cleaning up intermediate files...
+2025-07-07 09:05:59,832 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\3. Cover Letter.pdf
+2025-07-07 09:05:59,832 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\4. Undertaking - Labour.pdf
+2025-07-07 09:05:59,832 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\5. Undertaking - Salaries.pdf
+2025-07-07 09:05:59,832 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\6. Local Content.pdf
+2025-07-07 09:05:59,832 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\7. Employment.pdf
+2025-07-07 09:05:59,832 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\8. Conflict Of Interest.pdf
+2025-07-07 09:05:59,832 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\9. Bid Requirements.pdf
+2025-07-07 09:05:59,832 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\10. All Declaration.pdf
+2025-07-07 09:05:59,832 - INFO - Removed intermediate PDF: C:\Users\AbrahamCEO\Desktop\RFQ Automation\eerre\rere (rerre)\11. Undertaking - Eligibility - Wilson.pdf
+2025-07-07 09:05:59,832 - INFO - Removed temporary merged PDF
+2025-07-07 09:05:59,832 - INFO - Processing complete. Keeping cover page and table of contents as Word documents only (not merged in PDF), and creating final merged PDF of all other documents.
+2025-07-07 09:15:13,689 - INFO - Document Processor initialized
+2025-07-07 09:15:13,691 - INFO - Log file: D:\GTAV\projects\new-docs-processor\logs\document_processor.log
